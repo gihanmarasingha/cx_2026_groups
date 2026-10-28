@@ -29,10 +29,9 @@ published, so Mathlib and Lean dependency sources are not rendered as course pag
 See the [Verso literate programming guide](https://verso.lean-lang.org/doc/latest/)
 for additional rendering options.
 
-Verso is pinned to the same release as `lean-toolchain`. When upgrading Lean,
-update the Verso revision in `lakefile.toml` to match, run `lake update`, and
-rebuild both the library and website. Commit `lake-manifest.json` to keep
-builds reproducible.
+Verso is pinned to a Lean 4.35.0-compatible backport that fixes rendering files
+using `module`. See [Project maintenance](project_maintenance.md) for the reason
+and instructions for upgrading Lean, Mathlib, and Verso.
 
 GitHub Actions builds the library and website on pushes and pull requests.
 Pushes to the default branch also publish `.lake/build/literate-html` to

@@ -20,6 +20,6 @@ name = "Cx2026Groups"
 
 [[require]]
 name = "verso"
-git = "https://github.com/leanprover/verso.git"
-# Match lean-toolchain.
-rev = "v4.35.0"
+git = "https://github.com/tdupu/verso.git"
+# Lean 4.35.0 backport of upstream #1043; see project_maintenance.md.
+rev = "6c1b93307c6637ab5d0ae1cd9560a7e55fd6680f"
