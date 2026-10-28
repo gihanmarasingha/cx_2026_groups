@@ -1,0 +1,18 @@
+landing_page = "Cx2026Groups"
+hide_commands = ["import", "#min_imports"]
+
+[[targets]]
+library = "Cx2026Groups"
+
+[metadata]
+title = "Leaning into Group Theory"
+description = "Curriculum X 2026–27: interactive course notes and Lean proofs."
+
+[modules."Cx2026Groups"]
+title = "Course overview"
+
+[modules."Cx2026Groups.Week1"]
+title = "Week 1: Introduction to interactive theorem proving"
+
+[order_children]
+"Cx2026Groups" = ["Cx2026Groups.Week1"]
