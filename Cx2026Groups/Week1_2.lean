@@ -30,7 +30,7 @@ Suppose we have the hypotheses `h1 : x = 5 * y` and `h2 : y = 2` and we wish to 
 $$`\begin{aligned}
 3 x - 4y &= 3(5y) - 4y && \text{by h1}\\
 & = 3(5 \cdot 2)  - 4 \cdot 2 && \text{by h2}  \\
-&= 22 && \text{by arithmetic} 
+&= 22 && \text{by arithmetic}
 \end{aligned}`
 
 Though you might not typically give a justification of each line in a handwritten proof.
@@ -45,7 +45,7 @@ example (h1 : x = 5 * y) (h2 : y = 2) : 3 * x - 4 * y = 22 := by
     _ = 22 := by norm_num
 
 /-!
-## Exercise 2.1 
+## Exercise 2.1
 
 Interact with the proof above by examining the goal immediately after each `by` command. How does
 the goal relate to the code? Can you see how each tactic following the `by` command proves the goal?
@@ -59,9 +59,9 @@ Complete the {tactic}`calc` proof below, replacing each {tactic}`sorry` with a t
 
 example (h1 : x = 4) (h2 : y = 2 * x - 1) : 5 * x - 3 * y = -1 := by
   calc
-    5 * x - 3 * y = 5 * x - 3 * (2 * x - 1) := by sorry
-    _ = 5 * 4 - 3 * (2 * 4 - 1) := by sorry
-    _ = -1 := by sorry
+    5 * x - 3 * y = 5 * x - 3 * (2 * x - 1) := by rw[h2]
+    _ = 5 * 4 - 3 * (2 * 4 - 1) := by rw[h1]
+    _ = -1 := by norm_num
 
 /-!
 ## Exercise 2.3
@@ -70,13 +70,13 @@ Complete the {tactic}`calc` proof below. This time, you'll need to supply the in
 proof and the justification for each line.
 
 Ensure you follow the syntax closely. Each `calc` line except the first begins with an `_`
-(underscore) character and an equals sign. The justification for each line follows `:= by`.  
+(underscore) character and an equals sign. The justification for each line follows `:= by`.
 
 -/
 
 example (h1 : x = 3) (h2 : x + y = 5) (h3 : y = 2 * z) : (x + 2 * z) + 2 * x = 11  := by
   calc
-     x + 2 * z + 2 * x = sorry := by sorry
+     x + 2 * z + 2 * x = x + y + 2 * z := by sorry
      _ = 11 := by sorry
   done
 
@@ -105,10 +105,10 @@ Complete each justification. One step uses `add_assoc` backwards.
 
 example (h1 : x + y = 6) (h2 : z = 4) : x + (y + z) = 10 := by
   calc
-    x + (y + z) = (x + y) + z := by sorry
-    _ = 6 + z := by sorry
-    _ = 6 + 4 := by sorry
-    _ = 10 := by sorry
+    x + (y + z) = (x + y) + z := by rw[add_assoc x y z ]
+    _ = 6 + z := by rw[h1]
+    _ = 6 + 4 := by rw[h2]
+    _ = 10 := by norm_num
 
 /-!
 ## Exercise 2.5
@@ -119,10 +119,10 @@ expose `y + z`, then use `h2`, then `h1`, and finish with arithmetic.
 
 example (h1 : x = 5) (h2 : y + z = 7) : (x + y) + z = 12 := by
   calc
-    (x + y) + z = x + (y + z) := by sorry
-    _ = sorry := by sorry
-    _ = sorry := by sorry
-    _ = 12 := by sorry
+    (x + y) + z = x + (y + z) := by rw[add_assoc x y z]
+    _ = x + 7 := by rw[h2]
+    _ = 5 + 7 := by rw[h1]
+    _ = 12 := by norm_num
 
 /-!
 ## Exercise 2.6
@@ -131,7 +131,9 @@ Write your own `calc` proof.
 -/
 
 example (w : ℤ) (h1 : x + y = z) (h2 : y + w = 4) : z + w = x + 4 := by
-  sorry
+  calc
+    z + w = x + y + w := by rw[← h1]
+    = x + (y+w) = x + 4 := by rw[add_addsoc]
   done
 
 /-!
