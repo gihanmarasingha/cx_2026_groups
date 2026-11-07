@@ -43,6 +43,14 @@ Undo the change before continuing.
 Open `Cx2026Groups/Week1/Week1_1.lean` in the Explorer to begin the rewriting exercises,
 then continue with `Week1_2.lean` and `Week1_3.lean`. Replace `sorry` with your
 proofs. A warning that a declaration uses `sorry` marks an unfinished exercise.
+-/
+
+#eval (2 + 2 : Nat)
+
+example : (2 : Nat) + 2 = 4 := by
+  rfl
+
+/-!
 
 ## Save your work and return later
 
@@ -60,43 +68,40 @@ and push work you want to keep before deleting a codespace.
 
 ## Get new course files
 
-Your lecturer will add files to the course repository during the course. Your
-fork and your existing codespace do not receive these updates automatically.
-There are two steps: update your fork from the course repository, then pull
-those updates into your codespace.
+Fetch the lecturer's updates into your Codespace, merge them with your work,
+then use **Sync Changes** to send the result to your fork. These steps assume
+you are working on the `main` branch.
 
-1. In your codespace, save your exercise work, then use **Source Control** to
-   stage, commit, and push your changes to your fork. Make sure you have no
-   uncommitted changes before continuing.
-2. In a browser, open **your fork** on GitHub and select the `main` branch.
-   Select **Sync fork → Update branch** to bring in the lecturer's changes.
-   See [GitHub's guide to syncing a fork](https://docs.github.com/en/pull-requests/how-tos/work-with-forks/syncing-a-fork).
-3. Return to your codespace, making sure you are also working on the `main`
-   branch. Press **F1**, search for **Git: Pull**, and select it. This downloads
-   and merges the changes from your fork. The new files appear in the Explorer;
-   the repository folder is already available inside the container.
-4. In the terminal, check the updated course:
+### Merge and sync the updates
+
+Save your files and commit any exercise changes in **Source Control** so your
+working tree is clean. In the terminal, run these commands in order. Run the
+merge only after the fetch succeeds.
 
 ```
-lake build
+git fetch upstream main
+git merge --no-edit FETCH_HEAD
 ```
 
-If you are using a different branch for your work, the updates must also be
-merged into that branch. The steps above assume you work on `main`.
+* `git fetch upstream main` downloads the latest commits from the course
+  repository's `main` branch. It leaves your branch and working files as they
+  are and records the commit it fetched in `FETCH_HEAD`.
+* `git merge --no-edit FETCH_HEAD` brings that fetched commit into your current
+  branch, combining the course updates with your exercise commits. If Git
+  creates a merge commit, `--no-edit` accepts the default commit message.
+  If Git reports a conflict, resolve it before syncing or ask your lecturer
+  for help.
+
+After the merge succeeds, check that your exercise solutions are still there.
+Click **Sync Changes** in the Codespace's **Source Control** view. It first
+pulls any changes from your fork, then pushes the merged commits back to it.
+Run `lake build` to check the updated course.
 
 New Lean files do not require a container rebuild. If the lecturer changes the
-project's dependencies, run `bash .devcontainer/setup.sh` after pulling. If the
+project's dependencies, run `bash .devcontainer/setup.sh` after updating. If the
 files in `.devcontainer` change, run **Codespaces: Rebuild Container** from the
 command palette and wait for setup to finish. In a local VS Code container,
 use **Dev Containers: Rebuild Container** instead.
-
-Adding a new weekly file will usually merge cleanly. If both you and the lecturer
-have changed the same lines in an existing file, Git may report a merge conflict.
-Resolve the conflict by combining the course updates with your solutions, then
-commit and push the result. If GitHub cannot sync your fork automatically, follow
-its instructions for resolving the conflicts in a pull request or ask your
-lecturer for help. Avoid **Discard changes** or a force sync, which can remove
-your exercise work.
 
 ## If setup or Lean fails
 
@@ -130,8 +135,3 @@ wait for setup to finish.
 For more about creating and resuming codespaces, see the
 [GitHub Codespaces documentation](https://docs.github.com/en/codespaces).
 -/
-
-#eval (2 + 2 : Nat)
-
-example : (2 : Nat) + 2 = 4 := by
-  rfl
