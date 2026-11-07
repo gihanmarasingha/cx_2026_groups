@@ -24,6 +24,14 @@ name = "Cx2026GroupsTeacher"
 [[lean_lib]]
 name = "Cx2026GroupsTools"
 
+[[lean_lib]]
+name = "Cx2026GroupsAuthoring"
+
+[[lean_exe]]
+name = "generateStudent"
+root = "GenerateStudent"
+supportInterpreter = true
+
 [[require]]
 name = "verso"
 git = "https://github.com/tdupu/verso.git"

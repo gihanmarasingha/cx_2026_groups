@@ -9,6 +9,7 @@ module
 public import Mathlib.Algebra.Group.Defs
 meta import Cx2026GroupsTools
 import Mathlib.Tactic.Linter.MinImports
+meta import Cx2026GroupsAuthoring
 
 set_option doc.verso.module true
 set_option doc.verso.suggestions false
@@ -35,7 +36,8 @@ namespace cx_2026
 
 variable {G : Type*} [Group G] (x y z : G)
 
-#print Group -- This shows the definition of `Group`. Remove it in the student version.
+teacher_only in
+#print Group
 
 /-!
 
@@ -111,7 +113,7 @@ lemma inv_mul_inv_mul_mul_cancel : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
     _ = 1 := by sorry
   done
 
--- REMOVE
+teacher_only in
 example : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
   calc
     (y⁻¹ * x⁻¹) * (x * y) = y⁻¹ * (x⁻¹ * (x * y)) := by rw [mul_assoc]
@@ -120,7 +122,6 @@ example : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
     _ = y⁻¹ * y := by rw [one_mul]
     _ = 1 := by rw [inv_mul_cancel]
   done
--- REMOVE
 
 /-!
 ## Exercise 0.2
@@ -136,14 +137,13 @@ each approach?
 example : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
   sorry
 
--- REMOVE
+teacher_only in
 example : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
   rw [mul_assoc]
   rw [←mul_assoc x⁻¹]
   rw [inv_mul_cancel]
   rw [one_mul]
   rw [inv_mul_cancel]
--- REMOVE
 
 
 /-!
@@ -161,14 +161,14 @@ lemma inv_inv : x⁻¹⁻¹ = x := by
     _ = x := by sorry
 
 
--- REMOVE
+teacher_only in
 example : x⁻¹⁻¹ = x := by
   calc
     x⁻¹⁻¹ = x⁻¹⁻¹ * 1 := by rw [mul_one]
     _ = x⁻¹⁻¹ * (x⁻¹ * x) := by rw [inv_mul_cancel]
     _ = (x⁻¹⁻¹ * x⁻¹) * x := by rw [mul_assoc]
     _ = 1 * x := by rw [inv_mul_cancel]
-    _ = x := by rw [one_mul] -- REMOVE
+    _ = x := by rw [one_mul]
 
 end
 

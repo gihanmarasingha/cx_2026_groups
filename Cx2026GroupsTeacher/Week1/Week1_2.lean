@@ -9,6 +9,7 @@ module
 import Mathlib.Algebra.Group.Int.Defs
 import Mathlib.Tactic.NormNum.Core
 import Mathlib.Tactic.Linter.MinImports
+meta import Cx2026GroupsAuthoring
 
 set_option doc.verso.module true
 set_option doc.verso.suggestions false
@@ -108,6 +109,14 @@ Complete each justification. One step uses `add_assoc` backwards.
 
 example (h1 : x + y = 6) (h2 : z = 4) : x + (y + z) = 10 := by
   calc
+    x + (y + z) = (x + y) + z := by sorry
+    _ = 6 + z := by sorry
+    _ = 6 + 4 := by sorry
+    _ = 10 := by sorry
+
+teacher_only in
+example (h1 : x + y = 6) (h2 : z = 4) : x + (y + z) = 10 := by
+  calc
     x + (y + z) = (x + y) + z := by rw [add_assoc x y z]
     _ = 6 + z := by rw [h1]
     _ = 6 + 4 := by rw [h2]
@@ -122,6 +131,14 @@ expose `y + z`, then use `h2`, then `h1`, and finish with arithmetic.
 
 example (h1 : x = 5) (h2 : y + z = 7) : (x + y) + z = 12 := by
   calc
+    (x + y) + z = x + (y + z) := by sorry
+    _ = sorry := by sorry
+    _ = sorry := by sorry
+    _ = 12 := by sorry
+
+teacher_only in
+example (h1 : x = 5) (h2 : y + z = 7) : (x + y) + z = 12 := by
+  calc
     (x + y) + z = x + (y + z) := by rw [add_assoc x y z]
     _ = x + 7  := by rw [h2]
     _ = 5 + 7 := by rw [h1]
@@ -134,8 +151,13 @@ Write your own `calc` proof.
 -/
 
 example (w : ℤ) (h1 : x + y = z) (h2 : y + w = 4) : z + w = x + 4 := by
+  sorry
+  done
+
+teacher_only in
+example (w : ℤ) (h1 : x + y = z) (h2 : y + w = 4) : z + w = x + 4 := by
   calc
-    z + w = (x + y) + w := by rw [h1] 
+    z + w = (x + y) + w := by rw [h1]
     _ = x + (y + w) := by rw [add_assoc]
     _ = x + 4 := by rw [h2]
   done
@@ -147,6 +169,11 @@ Use a `calc` block to regroup four terms. Aim for one use of `add_assoc` per lin
 intermediate expression lets you finish in two steps?
 -/
 
+example (w : ℤ) : ((w + x) + y) + z = w + (x + (y + z)) := by
+  sorry
+  done
+
+teacher_only in
 example (w : ℤ) : ((w + x) + y) + z = w + (x + (y + z)) := by
   calc
     ((w + x) + y) + z = (w + x) + (y + z) := by rw [add_assoc]

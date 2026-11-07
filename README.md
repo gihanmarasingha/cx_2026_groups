@@ -50,15 +50,13 @@ By the end of this project, you will be able to:
 
 ## Maintaining this project
 
-Student files are in `Cx2026Groups/`; teacher copies are in
-`Cx2026GroupsTeacher/`. The public website renders only the student library.
+Author lessons in `Cx2026GroupsTeacher/`. Run `lake exe generateStudent` to
+update the Student files and public Verso configuration.
 To build a local website containing both versions, run
 `python3 scripts/build_teacher_site.py`, then preview it with
 `python3 -m http.server 8001 --bind 127.0.0.1 --directory .lake/build/literate-html-teacher`.
 Open <http://localhost:8001>.
 
-See [Project maintenance](project_maintenance.md) for information for the project author on how to
-work with Verso, how some hacks were used to fix issues with Verso, and how to maintain the code
-when upgrading to a later version of Lean and Mathlib.
+See [Project maintenance](project_maintenance.md) for the authoring workflow
 and instructions for upgrading Lean, Mathlib, and Verso.
 
