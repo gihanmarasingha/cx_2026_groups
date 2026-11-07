@@ -1,7 +1,5 @@
-import Cx2026GroupsTeacher.Week1_0
-import Cx2026GroupsTeacher.Week1_1
-import Cx2026GroupsTeacher.Week1_2
-import Cx2026GroupsTeacher.Week1_3
+import Cx2026GroupsTeacher.Week1
+import Cx2026GroupsTeacher.Week2
 
 set_option doc.verso.module true
 
