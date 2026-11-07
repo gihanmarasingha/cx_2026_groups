@@ -1,6 +1,6 @@
 landing_page = "Cx2026Groups"
 order = ["Cx2026Groups", "Cx2026GroupsTeacher"]
-hide_commands = ["import", "#min_imports", "set_option", "#import_bumps"]
+hide_commands = ["import", "#min_imports", "set_option", "#import_bumps", "namespace", "section", "NewTactic", "NewTheorem", "public section", "end"]
 extra_css = ["course.css"]
 
 [[targets]]

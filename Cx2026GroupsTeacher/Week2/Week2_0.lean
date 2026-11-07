@@ -168,8 +168,7 @@ example : x⁻¹⁻¹ = x := by
     _ = x⁻¹⁻¹ * (x⁻¹ * x) := by rw [inv_mul_cancel]
     _ = (x⁻¹⁻¹ * x⁻¹) * x := by rw [mul_assoc]
     _ = 1 * x := by rw [inv_mul_cancel]
-    _ = x := by rw [one_mul]
--- REMOVE
+    _ = x := by rw [one_mul] -- REMOVE
 
 end
 
