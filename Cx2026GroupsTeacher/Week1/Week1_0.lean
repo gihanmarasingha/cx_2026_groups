@@ -24,7 +24,7 @@ installs Lean and its dependencies for you.
    and builds the course. This can take several minutes. Leave setup running
    until it completes.
 4. The browser opens VS Code with the Lean extension installed. This file,
-   `Cx2026Groups/Week1_0.lean`, opens automatically.
+   `Cx2026Groups/Week1/Week1_0.lean`, opens automatically.
 
 ## Run Lean and inspect proofs
 
@@ -40,47 +40,17 @@ to check a proof. Try changing the right-hand side of the example from `4` to
 `5`: Lean reports an error because the proof no longer establishes the claim.
 Undo the change before continuing.
 
-Open `Cx2026Groups/Week1_1.lean` in the Explorer to begin the rewriting exercises,
+Open `Cx2026Groups/Week1/Week1_1.lean` in the Explorer to begin the rewriting exercises,
 then continue with `Week1_2.lean` and `Week1_3.lean`. Replace `sorry` with your
 proofs. A warning that a declaration uses `sorry` marks an unfinished exercise.
 
-## Check the whole project
-
-Choose **Terminal → New Terminal**. From the repository root, run:
-
-```
-lake build
-```
-
-This checks all the course modules. To check just the rewriting file, run:
-
-```
-lake env lean Cx2026Groups/Week1_1.lean
-```
-
-A successful build can still contain `sorry` warnings: it does not mean all the
-exercises have been completed.
-
-## Preview the course website
-
-In the terminal, run:
-
-```
-lake build :literateHtml
-python3 -m http.server 8000 --bind 0.0.0.0 --directory .lake/build/literate-html
-```
-
-The first website build also compiles Verso and may take a while. Open the
-**Ports** tab and use **Open in Browser** for port **8000** to read the generated
-notes. Keep the server running while you browse; use **Ctrl+C** in its terminal
-to stop it. After editing the notes, rebuild the website and refresh the browser.
-
 ## Save your work and return later
 
-Save files with **Ctrl+S** (or **Cmd+S** on macOS). Saving updates the codespace's
-disk. To keep a copy on GitHub, open **Source Control**, stage your changes,
-enter a commit message, commit, and use **Sync Changes** or **Push**. Use your
-fork if you do not have write access to the course repository.
+Save files with **Ctrl+S** (or **Cmd+S** on macOS). Saving updates the
+codespace's disk. To keep a copy on GitHub, open **Source Control**, stage your
+changes, enter a commit message (a description of the changes you have made) ,
+commit, and use **Sync Changes** or **Push**. Use your fork if you do not have
+write access to the course repository.
 
 When finished, open [your codespaces](https://github.com/codespaces), find this
 codespace, and choose **Stop codespace** from its menu. Resume the same codespace
@@ -101,9 +71,9 @@ those updates into your codespace.
 2. In a browser, open **your fork** on GitHub and select the `main` branch.
    Select **Sync fork → Update branch** to bring in the lecturer's changes.
    See [GitHub's guide to syncing a fork](https://docs.github.com/en/pull-requests/how-tos/work-with-forks/syncing-a-fork).
-3. Return to your codespace, making sure you are also working on `main`.
-   Press **F1**, search for **Git: Pull**, and select it. This downloads and
-   merges the changes from your fork. The new files appear in the Explorer;
+3. Return to your codespace, making sure you are also working on the `main`
+   branch. Press **F1**, search for **Git: Pull**, and select it. This downloads
+   and merges the changes from your fork. The new files appear in the Explorer;
    the repository folder is already available inside the container.
 4. In the terminal, check the updated course:
 

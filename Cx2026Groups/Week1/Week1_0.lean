@@ -24,7 +24,7 @@ installs Lean and its dependencies for you.
    and builds the course. This can take several minutes. Leave setup running
    until it completes.
 4. The browser opens VS Code with the Lean extension installed. This file,
-   `Cx2026Groups/Week1_0.lean`, opens automatically.
+   `Cx2026Groups/Week1/Week1_0.lean`, opens automatically.
 
 ## Run Lean and inspect proofs
 
@@ -40,7 +40,7 @@ to check a proof. Try changing the right-hand side of the example from `4` to
 `5`: Lean reports an error because the proof no longer establishes the claim.
 Undo the change before continuing.
 
-Open `Cx2026Groups/Week1_1.lean` in the Explorer to begin the rewriting exercises,
+Open `Cx2026Groups/Week1/Week1_1.lean` in the Explorer to begin the rewriting exercises,
 then continue with `Week1_2.lean` and `Week1_3.lean`. Replace `sorry` with your
 proofs. A warning that a declaration uses `sorry` marks an unfinished exercise.
 
@@ -55,7 +55,7 @@ lake build
 This checks all the course modules. To check just the rewriting file, run:
 
 ```
-lake env lean Cx2026Groups/Week1_1.lean
+lake env lean Cx2026Groups/Week1/Week1_1.lean
 ```
 
 A successful build can still contain `sorry` warnings: it does not mean all the

@@ -13,7 +13,7 @@ Lean VS Code extension, downloads precompiled artifacts for the Mathlib modules
 imported by the course, and runs
 `lake build` using the project's pinned dependencies.
 
-Start with [Week 1.0: Getting started with Codespaces](Cx2026Groups/Week1_0.lean)
+Start with [Week 1.0: Getting started with Codespaces](Cx2026Groups/Week1/Week1_0.lean)
 for instructions on checking proofs, working on exercises, previewing the course
 website, and saving your work.
 

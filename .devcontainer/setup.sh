@@ -29,4 +29,4 @@ echo "Downloading Mathlib and its precompiled artifacts..."
 retry_download python3 .devcontainer/fetch_mathlib_cache.py
 echo "Checking the course..."
 lake build
-echo "Setup complete. Open Cx2026Groups/Week1_0.lean to get started."
+echo "Setup complete. Open Cx2026Groups/Week1/Week1_0.lean to get started."

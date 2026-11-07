@@ -19,7 +19,7 @@
       "extensions": ["leanprover.lean4"]
     },
     "codespaces": {
-      "openFiles": ["Cx2026Groups/Week1_0.lean"]
+      "openFiles": ["Cx2026Groups/Week1/Week1_0.lean"]
     }
   },
   "forwardPorts": [8000],
