@@ -49,6 +49,9 @@ Below, we prove `(x * y) * z = x * (y * z)` using a rewrite with `mul_assoc a b 
 `x * (y * z) = x * (y * z)`, which the {tactic}`rw` tactic immediately recognises as being true.
 -/
 
+NewTactic rw
+NewTheorem mul_assoc
+
 example : (x * y) * z = x * (y * z) := by
   rw [mul_assoc x y z]
 
@@ -60,6 +63,8 @@ For groups written multiplicatively, the identity element in Lean is denoted `1`
 two axioms for multiplication by the identity: {name}`mul_one`, which states `a * 1 = a` and
 {name}`one_mul`, which states `1 * a = a`.
 -/
+
+NewTheorem mul_one one_mul
 
 example : x * 1 = x := by
   rw [mul_one]
@@ -76,6 +81,8 @@ The multiplicative inverse axiom, called {name}`inv_mul_cancel` in Mathlib, stat
 Type `⁻¹` as `\-1` followed by space.
 -/
 
+NewTheorem inv_mul_cancel
+
 example : x⁻¹ * x = 1 := by
   rw [inv_mul_cancel]
 
@@ -88,9 +95,14 @@ You need to fill in each equation line and give a justification in the `by sorry
 Each justification can be accomplished using a `rw`.
 -/
 
+NewTactic calc
+
 public section
 
+NewTactic sorry done
+
 lemma inv_mul_inv_mul_mul_cancel : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
+  course_proof =>
   calc
     (y⁻¹ * x⁻¹) * (x * y) = y⁻¹ * (x⁻¹ * (x * y)) := by sorry
     _ = sorry := by sorry
@@ -141,12 +153,17 @@ example : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
 
 -/
 
+section
+
+local NewTactic sorry
+
 lemma inv_inv : x⁻¹⁻¹ = x := by
-  course_proof tactics ["calc", "rw", "sorry"] theorems [mul_assoc, mul_one, one_mul,
-  inv_mul_cancel] =>
+  course_proof =>
     calc
       x⁻¹⁻¹ = x⁻¹⁻¹ * 1 := by rw [mul_one]
       _ = x := by sorry
+
+end
 
 end
 

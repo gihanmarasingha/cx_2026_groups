@@ -88,20 +88,30 @@ planner/renderer command interfaces and module-map format.
 
 ## Restricting exercise proofs
 
-Add `meta import Cx2026GroupsTools` to the lesson, then put the exercise's
-entire proof inside a `course_proof` block. Set both lists for that exercise.
+Add `meta import Cx2026GroupsTools` to the lesson. Use `NewTactic` and
+`NewTheorem` as you introduce tactics and results, then put each exercise's
+entire proof inside a `course_proof` block.
 
 ```lean
+NewTactic exact
+NewTheorem Nat.zero_add
+
 example (n : Nat) : 0 + n = n := by
-  course_proof tactics ["exact"] theorems [Nat.zero_add] =>
+  course_proof =>
     exact Nat.zero_add n
 ```
 
-The tactic list applies to the written tactics, including nested `by` blocks.
-The theorem list applies to references in the elaborated proof, including results
+Entries accumulate for later proofs in the file and in modules that import it.
+Use `local NewTactic` or `local NewTheorem` to limit an entry to the enclosing
+section or namespace. For example, put `local NewTactic sorry` in a section
+around an unfinished exercise and remove it when checking completed submissions.
+Quote symbolic tactic names such as `"·"` or `"<;>"`.
+
+The tactic whitelist covers written tactics, including nested `by` blocks. The
+theorem whitelist covers references in the elaborated proof, including results
 inserted by tactics. A few standard equality combinators used by `rw` and `calc`
-are always available. To ship an unfinished scaffold, include `"sorry"` in the
-tactic list. Omit it when checking completed submissions.
+are always available. Use `course_proof tactics [...] theorems [...] =>` when an
+exercise needs to replace the accumulated whitelist with explicit lists.
 
 Keep the wrapper and its lists fixed when checking submissions. The checker
 trusts the listed results and checks references in the proof term. An equivalent
