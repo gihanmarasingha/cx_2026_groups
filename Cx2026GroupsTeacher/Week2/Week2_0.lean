@@ -8,7 +8,6 @@ module
 
 public import Mathlib.Algebra.Group.Defs
 meta import Cx2026GroupsTools
-import Mathlib.Tactic.NormNum.Core
 import Mathlib.Tactic.Linter.MinImports
 
 set_option doc.verso.module true
@@ -34,7 +33,7 @@ identity property.
 
 namespace cx_2026
 
-variable (G : Type*) [Group G] (x y z : G)
+variable {G : Type*} [Group G] (x y z : G)
 
 #print Group -- This shows the definition of `Group`. Remove it in the student version.
 
@@ -98,11 +97,12 @@ Each justification can be accomplished using a `rw`.
 NewTactic calc
 
 public section
+ 
+set_option course.checkProofs true
 
 NewTactic sorry done
 
 lemma inv_mul_inv_mul_mul_cancel : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
-  course_proof =>
   calc
     (y⁻¹ * x⁻¹) * (x * y) = y⁻¹ * (x⁻¹ * (x * y)) := by sorry
     _ = sorry := by sorry
@@ -149,21 +149,27 @@ example : (y⁻¹ * x⁻¹) * (x * y) = 1 := by
 /-!
 ## Exercise 0.3
 
-
-
+Next, prove that `x⁻¹⁻¹ = x` via a calculation.  Recall you can type `⁻¹` as `\-1`.
 -/
 
-section
-
-local NewTactic sorry
-
 lemma inv_inv : x⁻¹⁻¹ = x := by
-  course_proof =>
-    calc
-      x⁻¹⁻¹ = x⁻¹⁻¹ * 1 := by rw [mul_one]
-      _ = x := by sorry
+  calc
+    x⁻¹⁻¹ = x⁻¹⁻¹ * 1 := by rw [mul_one]
+    _ = sorry := by sorry
+    _ = sorry := by sorry
+    _ = sorry := by sorry
+    _ = x := by sorry
 
-end
+
+-- REMOVE
+example : x⁻¹⁻¹ = x := by
+  calc
+    x⁻¹⁻¹ = x⁻¹⁻¹ * 1 := by rw [mul_one]
+    _ = x⁻¹⁻¹ * (x⁻¹ * x) := by rw [inv_mul_cancel]
+    _ = (x⁻¹⁻¹ * x⁻¹) * x := by rw [mul_assoc]
+    _ = 1 * x := by rw [inv_mul_cancel]
+    _ = x := by rw [one_mul]
+-- REMOVE
 
 end
 

@@ -1,11 +1,18 @@
 module
 
+public meta import Lean.Elab.BuiltinTerm
 public meta import Lean.Elab.Tactic.Doc
 public meta import Lean.Elab.Tactic.Basic
 public meta import Lean.ScopedEnvExtension
 public meta import Lean.Util.FoldConsts
 
 public meta section
+
+/-- Check ordinary `by` blocks against the current course whitelist. -/
+register_option course.checkProofs : Bool := {
+  defValue := false
+  descr := "check ordinary `by` blocks against the current course whitelist"
+}
 
 namespace Cx2026Groups
 
@@ -88,7 +95,8 @@ private def evalCourseProof (rules : Whitelist) (body : Syntax) : TacticM Unit :
   let tokens ← Lean.Elab.Tactic.Doc.firstTacticTokens
   checkTactics rules.tactics tokens body
   let goals ← getUnsolvedGoals
-  evalTactic body
+  -- The syntax check already covers nested `by` blocks, and the proof check covers their results.
+  withOptions (course.checkProofs.set · false) (evalTactic body)
   unless (← getUnsolvedGoals).isEmpty do
     throwError "The course proof did not close all goals."
   for goal in goals do
@@ -108,5 +116,14 @@ elab "course_proof" " tactics " "[" tactics:str,* "]" " theorems " "[" theorems:
   let allowedTheorems ← theorems.getElems.mapM fun name =>
     realizeGlobalConstNoOverloadWithInfo name
   evalCourseProof { tactics := tactics.getElems.map (·.getString), theorems := allowedTheorems } body.raw
+
+/-- Route a standard `by` block through `course_proof` when course checking is enabled. -/
+@[term_elab Lean.Parser.Term.byTactic]
+def elabCourseBy : Term.TermElab := fun stx expectedType? => do
+  unless course.checkProofs.get (← getOptions) do
+    throwUnsupportedSyntax
+  let body : TSyntax ``Parser.Tactic.tacticSeq := ⟨stx[1]⟩
+  let checkedBody ← `(tacticSeq| course_proof => $body)
+  Term.elabByTactic (stx.setArg 1 checkedBody.raw) expectedType?
 
 end Cx2026Groups

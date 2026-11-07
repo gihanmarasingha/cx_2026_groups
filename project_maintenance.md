@@ -89,16 +89,20 @@ planner/renderer command interfaces and module-map format.
 ## Restricting exercise proofs
 
 Add `meta import Cx2026GroupsTools` to the lesson. Use `NewTactic` and
-`NewTheorem` as you introduce tactics and results, then put each exercise's
-entire proof inside a `course_proof` block.
+`NewTheorem` as you introduce tactics and results. Enable checking for a group
+of exercises with `set_option course.checkProofs true` inside a section.
 
 ```lean
 NewTactic exact
 NewTheorem Nat.zero_add
 
+section
+set_option course.checkProofs true
+
 example (n : Nat) : 0 + n = n := by
-  course_proof =>
-    exact Nat.zero_add n
+  exact Nat.zero_add n
+
+end
 ```
 
 Entries accumulate for later proofs in the file and in modules that import it.
@@ -110,12 +114,15 @@ Quote symbolic tactic names such as `"·"` or `"<;>"`.
 The tactic whitelist covers written tactics, including nested `by` blocks. The
 theorem whitelist covers references in the elaborated proof, including results
 inserted by tactics. A few standard equality combinators used by `rw` and `calc`
-are always available. Use `course_proof tactics [...] theorems [...] =>` when an
-exercise needs to replace the accumulated whitelist with explicit lists.
+are always available. Automatic checking is off by default. With the option off,
+use `course_proof =>` to check one proof, or use
+`course_proof tactics [...] theorems [...] =>` to supply explicit lists.
 
-Keep the wrapper and its lists fixed when checking submissions. The checker
-trusts the listed results and checks references in the proof term. An equivalent
-proof obtainable by reduction can pass without referencing the named theorem.
+Keep the options and whitelist entries fixed when checking submissions, and
+require `by` blocks for exercises that use automatic checking. A direct proof
+term such as `:= Nat.zero_add n` falls outside the automatic check. The checker
+trusts the listed results, and a proof by reduction can pass without referencing
+the named theorem.
 
 ## Temporary Verso backport
 
