@@ -35,7 +35,7 @@ GitHub Pages. Set **Settings → Pages → Build and deployment → Source** to
 ## Student and teacher versions
 
 Student lessons live in `Cx2026Groups/`; matching teacher lessons live in
-`Cx2026GroupsTeacher/`. They started as identical copies. Edit teacher files as
+`Cx2026GroupsTeacher/`. Edit teacher files as
 your authoring originals, then manually copy and adapt lessons for students.
 The overview files import their own library's lessons. When adding a lesson,
 add its import to the corresponding overview and set its title and navigation
