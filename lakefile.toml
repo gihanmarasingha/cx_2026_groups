@@ -21,6 +21,9 @@ name = "Cx2026Groups"
 [[lean_lib]]
 name = "Cx2026GroupsTeacher"
 
+[[lean_lib]]
+name = "Cx2026GroupsTools"
+
 [[require]]
 name = "verso"
 git = "https://github.com/tdupu/verso.git"

@@ -43,8 +43,8 @@ order in the rendering configurations. Keep student files independent of teacher
 imports. If both versions define named declarations that might be imported
 together, use distinct namespaces for those declarations.
 
-`lakefile.toml` registers both libraries, but the default target remains the
-student library. To check the teacher files explicitly:
+`lakefile.toml` registers both course libraries and the shared `Cx2026GroupsTools`
+library. The default target is the student library. To check the teacher files explicitly:
 
 ```sh
 lake build Cx2026GroupsTeacher
@@ -85,6 +85,27 @@ python3 .devcontainer/fetch_mathlib_cache.py --teacher
 
 When upgrading Verso, check both site commands: the helper relies on the pinned
 planner/renderer command interfaces and module-map format.
+
+## Restricting exercise proofs
+
+Add `meta import Cx2026GroupsTools` to the lesson, then put the exercise's
+entire proof inside a `course_proof` block. Set both lists for that exercise.
+
+```lean
+example (n : Nat) : 0 + n = n := by
+  course_proof tactics ["exact"] theorems [Nat.zero_add] =>
+    exact Nat.zero_add n
+```
+
+The tactic list applies to the written tactics, including nested `by` blocks.
+The theorem list applies to references in the elaborated proof, including results
+inserted by tactics. A few standard equality combinators used by `rw` and `calc`
+are always available. To ship an unfinished scaffold, include `"sorry"` in the
+tactic list. Omit it when checking completed submissions.
+
+Keep the wrapper and its lists fixed when checking submissions. The checker
+trusts the listed results and checks references in the proof term. An equivalent
+proof obtainable by reduction can pass without referencing the named theorem.
 
 ## Temporary Verso backport
 
